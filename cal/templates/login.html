@@ -1,0 +1,40 @@
+{% load crispy_forms_tags %}
+{% load static %}
+
+<html>
+    <head>
+
+    <title>login</title>
+    <link href="{% static 'css/login.css' %}" type="text/css" rel="stylesheet">
+
+
+    </head>
+    <body>
+
+
+
+
+         {% for message in messages %}
+            {% if "logout" in message.tags %}
+                <div class="msg">
+                    <li>{{ message }}</li>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+
+        <div class="container">
+            <form action="#" method="post">
+                {% csrf_token %}
+                <fieldset class="field">
+                    <legend>Log In!</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="btn">
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+           
+        </div>
+    </body>
+</html>

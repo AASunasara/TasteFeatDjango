@@ -1,0 +1,26 @@
+body {
+
+    background-color: #DCDCDC;
+}
+
+.container{
+    width : 200px;
+    padding : 100px 500px 0px 500px;
+    
+    
+}
+
+
+.field{
+
+    padding : 20px;
+    border-radius: 10px;
+}
+
+.btn{
+
+    position: relative;
+    left : 50%;
+    top : 20px;
+    padding-bottom : 20px;
+}

@@ -1,0 +1,91 @@
+{% load crispy_forms_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        
+        <title>Document</title>
+    </head>
+
+    <body>
+        <header>
+            <div>
+            <nav class="nav">
+                <a class="nav-item" href="{% url 'home' %}">Home</a>
+                <a class="nav-item" href="{% url 'logout' %}">Logout</a>
+                <a class="nav-item" href="{% url 'day' %}">Day</a>
+
+            </nav>
+            </div>
+        
+            {% for message in messages %}
+             {% if "home" in message.tags %}
+             <div role="alert" class="psd-msg">
+                 <li>{{ message }}</li>
+             </div>
+             {% endif %}
+             {% endfor %}
+        </header>
+
+        
+        
+                <form method="POST" id="ItemsForm">
+                        {% csrf_token %}
+
+                        <div>
+                            <label for="item_names">Item Name: </label>
+                            {{ form.item_names }}                     
+                        </div>
+                        <br>
+                        
+                        <div>
+                            <label for="rweight">Row Weight:</label>
+                            <input type="number" min="0.0" step="0.01" id="rweight" name="rweight" >
+                        </div>
+                        <br>
+
+                        <div>
+                            <label for="iweight">Item Weight</label>
+                            <input type="number" min="0.0" step="0.01" name="iweight" id="iweight">    
+                        </div>
+                        <br>
+
+                        <div>
+                                <label for="grade">Quality Grade: </label>
+                                {{ form.grade }}
+                        </div>
+                        <br>
+                        
+                        
+                        <div>
+                                <label for="worker">Worker Name: </label>
+                                {{ form.worker }}
+                        </div>
+                        <br>
+
+                        <div>
+                                <label for="note">Note:</label>
+                                <input type = "text" id="note" name="note">
+                        </div>
+                        <br>
+                    
+                    
+                        <input type="submit" value="sbmt">
+                </form>
+
+       
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
