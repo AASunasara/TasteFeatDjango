@@ -1,4 +1,4 @@
-{% load crispy_forms_tags %}
+
 {% load static %}
 
 <html>
@@ -14,7 +14,7 @@
 
 
 
-         {% for message in messages %}
+        {% for message in messages %}
             {% if "logout" in message.tags %}
                 <div class="msg">
                     <li>{{ message }}</li>
@@ -23,18 +23,18 @@
         {% endfor %}
 
 
-        <div class="container">
-            <form action="#" method="post">
+        <div class="login-page">
+            <div class="form">
+              
+              <form class="login-form" method="POST">
                 {% csrf_token %}
-                <fieldset class="field">
-                    <legend>Log In!</legend>
-                    {{ form|crispy }}
-                </fieldset>
-                <div class="btn">
-                    <button type="submit">Login</button>
-                </div>
-            </form>
-           
-        </div>
+                <input type="text" placeholder="username" name="username"/>
+                <input type="password" placeholder="password" name="password"/>
+                <button>login</button>
+               
+                
+              </form>
+            </div>
+          </div>
     </body>
 </html>

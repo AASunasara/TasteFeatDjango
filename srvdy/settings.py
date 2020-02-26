@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1',]
 
 STATICFILES_DIRS = [
-    "/srvdy/cal/static",
+    "/srvdy/cal/templates/static",
 ]
 
 
