@@ -19,13 +19,13 @@
                 <a class="nav-item" href="{% url 'logout' %}">Logout</a>
                 <a class="nav-item" href="{% url 'day' %}">Day</a>
 
-            </nav>
+            </nav><br><br>
             </div>
         
             {% for message in messages %}
              {% if "day" in message.tags %}
              <div role="alert" class="psd-msg">
-                 <li>{{ message }}</li>
+                 <li>{{ message }}</li><br><br>
              </div>
              {% endif %}
              {% endfor %}

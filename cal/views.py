@@ -17,10 +17,10 @@ def home(request):
             instance = form.save(commit=False)
             instance.user_id = request.user
             instance.save()
-            messages.success(request, 'added', extra_tags='home')
+            messages.success(request, 'Added Successfully.', extra_tags='home')
             return redirect('home')
         else:
-            messages.success(request, 'not added', extra_tags='home')
+            messages.success(request, 'Not added! Check the details.. ', extra_tags='home')
             return render(request, 'home.html', {'form': form} )
 
     else:
@@ -37,7 +37,7 @@ def day(request):
             instance = form.save(commit=False)
             instance.user_id = request.user
             instance.save()
-            messages.success(request, 'added', extra_tags='day')
+            messages.success(request, 'Added Successfully.', extra_tags='day')
             return redirect('day')
         else:
             messages.success(request, "Today's Detail is already added you can go and update it." , extra_tags='day')
