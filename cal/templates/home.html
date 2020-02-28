@@ -19,6 +19,7 @@
             <a class="nav-item" href="{% url 'home' %}">Home</a>
             <a class="nav-item" href="{% url 'logout' %}">Logout</a>
             <a class="nav-item" href="{% url 'day' %}">Day</a>
+            <a class="nav-item" href="{% url 'show' %}">Show</a>
 
         </nav>
        
@@ -41,7 +42,7 @@
             </div><br>
             
             <div>
-                <label for="rweight">Row Weight:</label>
+                <label for="rweight">Raw Weight:</label>
                 <input type="number" min="0.0" step="0.01" id="rweight" name="rweight" >
             </div><br>
 
@@ -63,10 +64,9 @@
             <div>
                 <label for="note" class="label">Note:</label>
                 <textarea rows="3" cols="30" id="note" name="note" class = "textarea"></textarea>
-                <!-- <input  type = "text" id="note" name="note"class = "note"> -->
             </div><br>
                     
-                <button type="submit">sbmt</button> 
+                <button type="submit">Add</button> 
         
         </form>
         </div>

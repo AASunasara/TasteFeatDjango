@@ -55,6 +55,12 @@ def logout_view(request):
     messages.success(request, 'You have been just logged out!', extra_tags='logout')
     return redirect('login')
 
+@login_required(login_url='login')
+def show(request):
+    all_items = items.objects.filter(user_id=request.user)
+    return render(request, 'show.html', {'all_items': all_items})
+
+ 
 """
 class CreateItemView(CreateView):
     model = items

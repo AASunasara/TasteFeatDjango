@@ -6,7 +6,7 @@ from datetime import date, datetime
 worker_names = (
 
     ('satish kumar', 'SATISH KUMAR'),
-    ('ronaji','RONAJI'),
+    ('rona ji','RONA JI'),
     ('ishwar lal','ISHWAR LAL'),
     ('babu','BABU'),
     ('sanjay','SANJAY'),
@@ -30,11 +30,11 @@ grades = (
 )
 
 class items(models.Model):
-    item_names = models.CharField(max_length=50, choices=item_names, default="SAMOSA")
+    item_names = models.CharField(max_length=50, choices=item_names)
     rweight = models.IntegerField(default=0.0)
     iweight = models.IntegerField(default=0.0)
-    grade = models.CharField(max_length=1, choices=grades, default="A")
-    worker = models.CharField(max_length=50, choices=worker_names, default="SATISH KUMAR")
+    grade = models.CharField(max_length=1, choices=grades)
+    worker = models.CharField(max_length=50, choices=worker_names )
     note = models.CharField(max_length=200, blank=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateField(default = date.today)
