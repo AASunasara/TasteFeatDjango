@@ -17,21 +17,23 @@
             <div>
             <nav class="nav">
                 <a class="nav-item" href="{% url 'home' %}">Home</a>
-                <a class="nav-item" href="{% url 'logout' %}">Logout</a>
                 <a class="nav-item" href="{% url 'day' %}">Day</a>
-                <a class="nav-item" href="{% url 'show' %}">Show</a>
+                <a class="nav-item" href="{% url 'show' %}">Show Data</a>
+                <a class="nav-item" href="{% url 'todays_detail' %}">Today's Detail</a>
+                <a class="nav-item" href="{% url 'logout' %}">Logout</a>
 
 
-            </nav><br><br>
+
+            </nav>
             </div>
         
             {% for message in messages %}
              {% if "day" in message.tags %}
              <div role="alert" class="psd-msg">
-                 <li>{{ message }}</li><br><br>
+                <br><li>{{ message }}</li>
              </div>
              {% endif %}
-             {% endfor %}
+            {% endfor %}
         </header>
 
         <div class="container">
@@ -50,17 +52,19 @@
                 <br>
                 <div>
                     <label for="fact_close_time">Factory Closeed At:</label>
-                    <input type = "time" id="fact_close_time" name="fact_close_time">
+                    <input type = "time" id="fact_close_time" name="fact_close_time" >
                 </div>
                 <br>
                 <div>
                     <label for="setup">Setup:</label>
-                    <input type = "text" id="setup" name="setup">
+                    <textarea rows="3" cols="30" id="setup" name="setup" class = "textarea" placeholder="-This field is not necessary."></textarea>
+
                 </div>
                 <br>
                 <div>
                     <label for="cleansing">Cleansing:</label>
-                    <input type = "text" id="cleansing" name="cleansing">
+                    <textarea rows="3" cols="30" id="cleansing" name="cleansing" class = "textarea" placeholder="-This field is not necessary."></textarea>
+
                 </div>
                 <br>            
 

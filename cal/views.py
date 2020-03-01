@@ -45,7 +45,6 @@ def day(request):
 
     else:
         form = DaysForm()
-
         return render(request, 'day.html', {'form': form})
 
 
@@ -59,6 +58,25 @@ def logout_view(request):
 def show(request):
     all_items = items.objects.filter(user_id=request.user)
     return render(request, 'show.html', {'all_items': all_items})
+
+@login_required(login_url='login')
+def todays_detail(request):
+    all_items = days.objects.filter(user_id=request.user)
+    return render(request, 'todays_detail.html', {'all_items': all_items})
+
+@login_required(login_url='login')
+def delete_item(request, list_id):
+    item = items.objects.get(pk=list_id)
+    item.delete()
+    messages.success(request, 'Item has been deleted!', extra_tags='show')
+    return redirect('show')
+
+@login_required(login_url='login')
+def delete_day(request, list_id):
+    day = days.objects.get(pk=list_id)
+    day.delete()
+    messages.success(request, 'Day has been deleted!', extra_tags='todays_detail')
+    return redirect('todays_detail')
 
  
 """

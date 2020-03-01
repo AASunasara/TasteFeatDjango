@@ -13,15 +13,16 @@
     </head>
 
     <body>
-        
-
-        <nav class="nav">
+        <header>
+            <nav class="nav">
             <a class="nav-item" href="{% url 'home' %}">Home</a>
-            <a class="nav-item" href="{% url 'logout' %}">Logout</a>
             <a class="nav-item" href="{% url 'day' %}">Day</a>
-            <a class="nav-item" href="{% url 'show' %}">Show</a>
+            <a class="nav-item" href="{% url 'show' %}">Show Data</a>
+            <a class="nav-item" href="{% url 'todays_detail' %}">Today's Detail</a>
+            <a class="nav-item" href="{% url 'logout' %}">Logout</a>
 
-        </nav>
+
+            </nav>
        
 
             {% for message in messages %}
@@ -31,7 +32,7 @@
                     </div>
                 {% endif %}
             {% endfor %}
-      
+        </header>
        
         <div class="container" >
         <form method="POST" id="ItemsForm">
@@ -63,7 +64,7 @@
             
             <div>
                 <label for="note" class="label">Note:</label>
-                <textarea rows="3" cols="30" id="note" name="note" class = "textarea"></textarea>
+                <textarea rows="3" cols="30" id="note" name="note" class = "textarea" placeholder="-This field is not necessary."></textarea>
             </div><br>
                     
                 <button type="submit">Add</button> 

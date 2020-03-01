@@ -1,3 +1,8 @@
+body {
+    background: #76b852;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+
+}
 .login-page {
     width: 360px;
     padding: 8% 0 0 0;
@@ -7,7 +12,7 @@
 
     position: relative;
     z-index: 1;
-    background: #FFFFFF;
+    background-color: blanchedalmond;
     max-width: 360px;
     margin: 0 auto 100px;
     padding: 45px;
@@ -42,12 +47,4 @@
 .form button:hover,.form button:active,.form button:focus {
     background: #43A047;
 }
-  
-body {
-    background: #76b852;
-    font-family: "Roboto", sans-serif;
-
-}
-        
-
-  
+    

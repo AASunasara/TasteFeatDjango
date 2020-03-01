@@ -1,7 +1,7 @@
 body {
   background: #76b852;
   /* font-family: "Roboto", sans-serif; */
-  font-family: Arial;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   margin:0;
 
 }
@@ -30,10 +30,6 @@ a {
   padding : 10px ;
 }
 
-
-
-
-
 .container{
   opacity: 0.75;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -51,7 +47,7 @@ label {
 }
 
 textarea{  
-
+  /* max-width: 50%; */
   vertical-align: middle;
 }
 

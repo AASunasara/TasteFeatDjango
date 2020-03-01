@@ -12,8 +12,6 @@ a {
     background-color:transparent
   
 }
-
-
 .container {
     text-transform: uppercase;
     text-align: center;
@@ -33,8 +31,7 @@ a {
     border: 1px solid #ddd;
     padding: 8px;
 }
- 
-  
+
 .container tr:hover {background-color: #ddd;}
 
 

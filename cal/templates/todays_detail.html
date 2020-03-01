@@ -3,7 +3,7 @@
 <html>
     <head>
         <title>showwww</title>
-        <link href="{% static  'css/show.css' %}" type="text/css" rel="stylesheet">
+        <link href="{% static  'css/todays_detail.css' %}" type="text/css" rel="stylesheet">
     </head>
     <body>
         <header>
@@ -18,10 +18,9 @@
 
 
             </nav>
-            </div>
         
             {% for message in messages %}
-             {% if "show" in message.tags %}
+             {% if "day" in message.tags %}
              <div role="alert" class="psd-msg">
                 <br><li>{{ message }}</li><br>
              </div>
@@ -33,13 +32,12 @@
         <table class="container">
 
             <tr>
-                <th>Item name</th>
-                <th>Raw weight</th>
-                <th>Product weight</th>
-                <th>Grade</th>
-                <th>Worker Name</th>
-                <th>Note</th>
-                <th>delete</th>
+                <th>Date</th>
+                <th>Factory Opened At</th>
+                <th>Factory Closed At</th>
+                <th>Setup</th>
+                <th>Cleansing</th>
+                <th>delete day</th>
                 
             </tr>              
 
@@ -47,15 +45,13 @@
                 {% for things in all_items %}
   
             <tr class="table-secondary">
-                <td class="striker">{{ things.item_names }}</td>
-                <td class="striker">{{ things.rweight }}</td>
-                <td class="striker">{{ things.iweight }}</td>
-                <td class="striker">{{ things.grade }}</td>
-                <td class="striker">{{ things.worker }}</td>
-                <td class="note">{{ things.note }}</td>
-                <td class="cross"><center><a href="{% url 'delete_item' things.id %}">delete item</a></center></td>
+                <td class="striker">{{ things.date }}</td>
+                <td class="striker">{{ things.fact_open_time }}</td>
+                <td class="striker">{{ things.fact_close_time }}</td>
+                <td class="striker">{{ things.setup }}</td>
+                <td class="striker">{{ things.cleansing }}</td>
+                <td class="cross"><center><a href="{% url 'delete_day' things.id %}">delete day</a></center></td>
 
-            
             </tr>
        
                 {% endfor %}
