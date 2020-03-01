@@ -49,6 +49,8 @@ a {
 }
 .note {
 
+    max-width: 300px; 
+    word-wrap: break-word;
     text-transform: none;
 }
 .nav {

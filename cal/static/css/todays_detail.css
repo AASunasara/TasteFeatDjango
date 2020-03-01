@@ -58,3 +58,9 @@ a {
     padding : 10px ;
 }
   
+.notess {
+
+    max-width: 300px; 
+    word-wrap: break-word;
+    text-transform: none;
+}

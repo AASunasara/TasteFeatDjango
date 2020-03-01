@@ -9,11 +9,11 @@
         <header>
             <div>
             <nav class="nav">
-                <a class="nav-item" href="{% url 'home' %}">Home</a>
-                <a class="nav-item" href="{% url 'day' %}">Day</a>
-                <a class="nav-item" href="{% url 'show' %}">Show Data</a>
-                <a class="nav-item" href="{% url 'todays_detail' %}">Today's Detail</a>
-                <a class="nav-item" href="{% url 'logout' %}">Logout</a>
+                    <a class="nav-item" href="{% url 'home' %}">Items</a>
+                    <a class="nav-item" href="{% url 'day' %}">Day</a>
+                    <a class="nav-item" href="{% url 'show' %}">Item's Details</a>
+                    <a class="nav-item" href="{% url 'todays_detail' %}">Day's Details</a>
+                    <a class="nav-item" href="{% url 'logout' %}">Logout</a>
 
 
 
@@ -33,6 +33,7 @@
         <table class="container">
 
             <tr>
+                <th>Date</th>
                 <th>Item name</th>
                 <th>Raw weight</th>
                 <th>Product weight</th>
@@ -47,6 +48,7 @@
                 {% for things in all_items %}
   
             <tr class="table-secondary">
+                <td class="striker">{{ things.date }}</td>
                 <td class="striker">{{ things.item_names }}</td>
                 <td class="striker">{{ things.rweight }}</td>
                 <td class="striker">{{ things.iweight }}</td>
@@ -54,8 +56,7 @@
                 <td class="striker">{{ things.worker }}</td>
                 <td class="note">{{ things.note }}</td>
                 <td class="cross"><center><a href="{% url 'delete_item' things.id %}">delete item</a></center></td>
-
-            
+                <td class="cross"><center><a href="{% url 'edit_item' things.id %}">edit_item</a></center></td>
             </tr>
        
                 {% endfor %}

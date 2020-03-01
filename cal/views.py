@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth import logout
@@ -26,7 +26,14 @@ def home(request):
     else:
         form = ItemsForm(request.POST or None)
         return render(request, 'home.html', {'form': form})
-    
+
+def edit_item(request, id=None):
+    instance = get_object_or_404(items, id=id )
+    form = ItemsForm(request.POST or None , instance = instance )
+    if form.is_valid():
+        instance = form.save(commit =  False)
+        instance.save()
+    return render(request, 'home.html', {'form':form})
 
 @login_required(login_url='login')
 def day(request):

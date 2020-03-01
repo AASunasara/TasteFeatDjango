@@ -15,10 +15,10 @@
     <body>
         <header>
             <nav class="nav">
-            <a class="nav-item" href="{% url 'home' %}">Home</a>
+            <a class="nav-item" href="{% url 'home' %}">Items</a>
             <a class="nav-item" href="{% url 'day' %}">Day</a>
-            <a class="nav-item" href="{% url 'show' %}">Show Data</a>
-            <a class="nav-item" href="{% url 'todays_detail' %}">Today's Detail</a>
+            <a class="nav-item" href="{% url 'show' %}">Item's Details</a>
+            <a class="nav-item" href="{% url 'todays_detail' %}">Day's Details</a>
             <a class="nav-item" href="{% url 'logout' %}">Logout</a>
 
 
@@ -44,12 +44,13 @@
             
             <div>
                 <label for="rweight">Raw Weight:</label>
-                <input type="number" min="0.0" step="0.01" id="rweight" name="rweight" >
+                {{ form.rweight }}
             </div><br>
 
             <div>
                 <label for="iweight">Item Weight</label>
-                <input type="number" min="0.0" step="0.01" name="iweight" id="iweight">    
+                <!-- <input type="number" min="0.0" step="0.01" name="iweight" id="iweight">     -->
+                {{ form.iweight }}
             </div><br>
 
             <div>
@@ -64,7 +65,8 @@
             
             <div>
                 <label for="note" class="label">Note:</label>
-                <textarea rows="3" cols="30" id="note" name="note" class = "textarea" placeholder="-This field is not necessary."></textarea>
+                <!-- <textarea rows="3" cols="30" id="note" name="note" class = "textarea" placeholder="-This field is not necessary."></textarea> -->
+                {{ form.note }}
             </div><br>
                     
                 <button type="submit">Add</button> 

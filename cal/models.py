@@ -30,12 +30,12 @@ grades = (
 )
 
 class items(models.Model):
-    item_names = models.CharField(max_length=50, choices=item_names)
+    item_names = models.CharField(max_length=100, choices=item_names)
     rweight = models.IntegerField(default=0.0)
     iweight = models.IntegerField(default=0.0)
     grade = models.CharField(max_length=1, choices=grades)
     worker = models.CharField(max_length=50, choices=worker_names )
-    note = models.CharField(max_length=200, blank=True, null=True)
+    note = models.CharField(max_length=1000, blank=True, null=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateField(default = date.today)
 
@@ -46,10 +46,9 @@ class days(models.Model):
     date = models.DateField(default = date.today, unique=True)
     fact_open_time = models.TimeField()
     fact_close_time = models.TimeField(blank=True, null=True)
-    setup = models.CharField(max_length=20, blank=True, null=True)
-    cleansing = models.CharField(max_length=20, blank=True, null=True)
+    setup = models.CharField(max_length=1000, blank=True, null=True)
+    cleansing = models.CharField(max_length=1000, blank=True, null=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return str(self.pk)
-

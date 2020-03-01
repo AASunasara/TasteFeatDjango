@@ -9,11 +9,11 @@
         <header>
             <div>
             <nav class="nav">
-                <a class="nav-item" href="{% url 'home' %}">Home</a>
-                <a class="nav-item" href="{% url 'day' %}">Day</a>
-                <a class="nav-item" href="{% url 'show' %}">Show Data</a>
-                <a class="nav-item" href="{% url 'todays_detail' %}">Today's Detail</a>
-                <a class="nav-item" href="{% url 'logout' %}">Logout</a>
+                    <a class="nav-item" href="{% url 'home' %}">Items</a>
+                    <a class="nav-item" href="{% url 'day' %}">Day</a>
+                    <a class="nav-item" href="{% url 'show' %}">Item's Details</a>
+                    <a class="nav-item" href="{% url 'todays_detail' %}">Day's Details</a>
+                    <a class="nav-item" href="{% url 'logout' %}">Logout</a>
 
 
 
@@ -37,7 +37,7 @@
                 <th>Factory Closed At</th>
                 <th>Setup</th>
                 <th>Cleansing</th>
-                <th>delete day</th>
+                <th>delete</th>
                 
             </tr>              
 
@@ -48,8 +48,8 @@
                 <td class="striker">{{ things.date }}</td>
                 <td class="striker">{{ things.fact_open_time }}</td>
                 <td class="striker">{{ things.fact_close_time }}</td>
-                <td class="striker">{{ things.setup }}</td>
-                <td class="striker">{{ things.cleansing }}</td>
+                <td class="notess">{{ things.setup }}</td>
+                <td class="notess">{{ things.cleansing }}</td>
                 <td class="cross"><center><a href="{% url 'delete_day' things.id %}">delete day</a></center></td>
 
             </tr>
