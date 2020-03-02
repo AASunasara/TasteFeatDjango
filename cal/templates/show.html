@@ -9,24 +9,22 @@
         <header>
             <div>
             <nav class="nav">
+                    <a class="menu">MENU </a>
                     <a class="nav-item" href="{% url 'home' %}">Items</a>
                     <a class="nav-item" href="{% url 'day' %}">Day</a>
                     <a class="nav-item" href="{% url 'show' %}">Item's Details</a>
                     <a class="nav-item" href="{% url 'todays_detail' %}">Day's Details</a>
                     <a class="nav-item" href="{% url 'logout' %}">Logout</a>
-
-
-
             </nav>
             </div>
         
             {% for message in messages %}
-             {% if "show" in message.tags %}
-             <div role="alert" class="psd-msg">
-                <br><li>{{ message }}</li><br>
-             </div>
-             {% endif %}
-             {% endfor %}
+                {% if "show" in message.tags %}
+                    <div role="alert" class="psd-msg">
+                        <br><li>{{ message }}</li><br>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </header>
         
 
@@ -35,13 +33,13 @@
             <tr>
                 <th>Date</th>
                 <th>Item name</th>
-                <th>Raw weight</th>
-                <th>Product weight</th>
+                <th>Raw weight(kg.)</th>
+                <th>Product weight(kg.)</th>
                 <th>Grade</th>
                 <th>Worker Name</th>
                 <th>Note</th>
-                <th>delete</th>
-                
+                <th>delete item</th>
+                <th>edit item</th>
             </tr>              
 
             {% if all_items %}
@@ -55,8 +53,8 @@
                 <td class="striker">{{ things.grade }}</td>
                 <td class="striker">{{ things.worker }}</td>
                 <td class="note">{{ things.note }}</td>
-                <td class="cross"><center><a href="{% url 'delete_item' things.id %}">delete item</a></center></td>
-                <td class="cross"><center><a href="{% url 'edit_item' things.id %}">edit_item</a></center></td>
+                <td class="delete"><center><a href="{% url 'delete_item' things.id %}">delete</a></center></td>
+                <td class="edit"><center><a href="{% url 'edit_item' things.id %}">edit</a></center></td>
             </tr>
        
                 {% endfor %}

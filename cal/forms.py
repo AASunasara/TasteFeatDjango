@@ -4,9 +4,11 @@ from django.contrib.auth.models import User
 
 
 class ItemsForm(forms.ModelForm):
+
+
     class Meta:
         model = items
-        fields = ['item_names', 'rweight', 'iweight', 'grade', 'worker','note']
+        fields = ['item_names', 'rweight', 'iweight', 'grade', 'worker', 'note']
 
 
 class DaysForm(forms.ModelForm):

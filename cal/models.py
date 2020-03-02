@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date, datetime
-
+from django.forms import TextInput, Textarea
+from django import forms
 
 worker_names = (
 
@@ -31,11 +32,12 @@ grades = (
 
 class items(models.Model):
     item_names = models.CharField(max_length=100, choices=item_names)
-    rweight = models.IntegerField(default=0.0)
-    iweight = models.IntegerField(default=0.0)
+    rweight = models.FloatField(default=0.0)
+    iweight = models.FloatField(default=0.0)
     grade = models.CharField(max_length=1, choices=grades)
     worker = models.CharField(max_length=50, choices=worker_names )
-    note = models.CharField(max_length=1000, blank=True, null=True)
+    note = forms.Textarea(attrs={'rows'})
+    # note = models.CharField(max_length=1000, blank=True, null=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateField(default = date.today)
 
