@@ -36,7 +36,8 @@ class items(models.Model):
     iweight = models.FloatField(default=0.0)
     grade = models.CharField(max_length=1, choices=grades)
     worker = models.CharField(max_length=50, choices=worker_names )
-    note = forms.Textarea(attrs={'rows'})
+    note = models.TextField(max_length=1000, blank=True, null=True)
+    # note = forms.Textarea(attrs={'rows'})
     # note = models.CharField(max_length=1000, blank=True, null=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateField(default = date.today)
@@ -46,7 +47,7 @@ class items(models.Model):
 
 class days(models.Model):
     date = models.DateField(default = date.today, unique=True)
-    fact_open_time = models.TimeField()
+    fact_open_time = models.TimeField(blank=True, null=True)
     fact_close_time = models.TimeField(blank=True, null=True)
     setup = models.CharField(max_length=1000, blank=True, null=True)
     cleansing = models.CharField(max_length=1000, blank=True, null=True)

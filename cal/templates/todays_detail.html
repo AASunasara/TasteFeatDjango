@@ -52,8 +52,8 @@
                 <td class="striker">{{ things.fact_close_time }}</td>
                 <td class="notess">{{ things.setup }}</td>
                 <td class="notess">{{ things.cleansing }}</td>
-                <td class="delete"><center><a href="{% url 'delete_item' things.id %}">delete</a></center></td>
-                <td class="edit"><center><a href="{% url 'edit_item' things.id %}">edit</a></center></td>
+                <td class="delete"><center><a href="{% url 'delete_day' things.id %}">delete</a></center></td>
+                <td class="edit"><center><a href="{% url 'edit_day' things.id %}">edit</a></center></td>
             </tr>
        
                 {% endfor %}

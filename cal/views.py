@@ -27,6 +27,7 @@ def home(request):
         form = ItemsForm(request.POST or None)
         return render(request, 'home.html', {'form': form})
 
+@login_required(login_url='login')
 def edit_item(request, id=None):
     instance = get_object_or_404(items, id=id )
     form = ItemsForm(request.POST or None , instance = instance )
@@ -34,6 +35,16 @@ def edit_item(request, id=None):
         instance = form.save(commit =  False)
         instance.save()
     return render(request, 'home.html', {'form':form})
+
+@login_required(login_url='login')
+def edit_day(request, id=None):
+    instance = get_object_or_404(days, id=id )
+    form = DaysForm(request.POST or None , instance = instance )
+    if form.is_valid():
+        instance = form.save(commit =  False)
+        instance.save()
+    return render(request, 'day.html', {'form':form})
+
 
 @login_required(login_url='login')
 def day(request):
