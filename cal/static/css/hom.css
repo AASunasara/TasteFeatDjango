@@ -5,30 +5,14 @@ body {
   margin:0;
 
 }
-
+/* 
 li {
   float: left;  
   width: 100%;
 
-}
+} */
 
-a {
 
-  color:#007bff;
-  text-decoration:none;
-  background-color:transparent
-
-}
-
-.nav {
-  line-height:2;
-  background-color: #DCDCDC;
-  height : 40px;
-}
- .nav-item{
-  height : 20px;
-  padding : 10px ;
-}
 
 .container{
   opacity: 0.75;
@@ -66,4 +50,47 @@ button {
   position: relative;
   left: 40%;
   
+}
+
+.nav {    
+  line-height:3;
+  background-color: #DCDCDC;
+  height : 50px;
+  padding: 0;
+  margin: 0;
+}
+.nav-item{
+  margin-left: -4px;
+  height : 20px;
+  padding : 10px ;
+  background-color: 4CAF50;
+}
+
+a {
+
+  color:#007bff;
+  text-decoration:none;
+  background-color:transparent;
+
+}
+a:hover {
+
+  display: inline-block; 
+  padding: 0px 20px;   
+  color: white;
+  background-color: #4CAF50;
+  height: 100%;
+  margin-left: -4px;
+
+  
+
+}
+.menu, .menu:hover {
+
+  margin: 0;
+  display: inline-block; 
+  padding: 0 20px;   
+  color: white;
+  background-color: #4CAF50;
+  height: 100%;
 }
