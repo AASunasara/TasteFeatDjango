@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from datetime import date, datetime
 from django.forms import TextInput, Textarea
 from django import forms
+from django.conf import settings
 
 worker_names = (
 
@@ -37,8 +38,6 @@ class items(models.Model):
     grade = models.CharField(max_length=1, choices=grades)
     worker = models.CharField(max_length=50, choices=worker_names )
     note = models.TextField(max_length=1000, blank=True, null=True)
-    # note = forms.Textarea(attrs={'rows'})
-    # note = models.CharField(max_length=1000, blank=True, null=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateField(default = date.today)
 
@@ -47,10 +46,10 @@ class items(models.Model):
 
 class days(models.Model):
     date = models.DateField(default = date.today, unique=True)
-    fact_open_time = models.TimeField(blank=True, null=True)
-    fact_close_time = models.TimeField(blank=True, null=True)
-    setup = models.CharField(max_length=1000, blank=True, null=True)
-    cleansing = models.CharField(max_length=1000, blank=True, null=True)
+    fact_open_time = models.TimeField(default="00:00 AM")
+    fact_close_time = models.TimeField(default="00:00 PM", blank=True, null=True)
+    setup = models.TextField(max_length=1000, blank=True, null=True)
+    cleansing = models.TextField(max_length=1000, blank=True, null=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):

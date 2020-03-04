@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
+        {% comment %} <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"> {% endcomment %}
         <link href="{% static 'css/day.css' %}" type="text/css" rel="stylesheet">
         
         <title>Document</title>
@@ -48,25 +48,22 @@
                 <br>
                 <div>
                     <label for="fact_open_time">Factory Opened At:</label>
-                     {% comment %} <input type = "time" id="fact_open_time" name="fact_open_time">  {% endcomment %}
                     {{ form.fact_open_time }}
                 </div>
                 <br>
                 <div>
-                    <label for="fact_close_time">Factory Closeed At:</label>
-                    <input type = "time" id="fact_close_time" name="fact_close_time" >
+                    <label for="fact_close_time">Factory Closed At:</label>
+                    {{ form.fact_close_time }}
                 </div>
                 <br>
                 <div>
-                    <label for="setup">Setup:</label>
-                    <textarea rows="3" cols="30" id="setup" name="setup" class = "textarea" placeholder="-This field is not necessary."></textarea>
-
+                    <label for="setup" class="setuplabel">Setup:</label>
+                    {{ form.setup }}    
                 </div>
                 <br>
                 <div>
-                    <label for="cleansing">Cleansing:</label>
-                    <textarea rows="3" cols="30" id="cleansing" name="cleansing" class = "textarea" placeholder="-This field is not necessary."></textarea>
-
+                    <label for="cleansing" class="cleansinglabel">Cleansing:</label>
+                    {{ form.cleansing }}
                 </div>
                 <br>            
 

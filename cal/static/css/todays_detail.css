@@ -17,7 +17,7 @@ body{
     border-collapse: collapse;
     width: 100%;
     opacity: 0.75;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    box-shadow: 0 0 20px 0 rgba(231, 49, 49, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     background-color: blanchedalmond;
     padding: 50px;
 
@@ -41,13 +41,9 @@ body{
     color: white;
 
 }
-.note {
-    max-width: 300px; 
-    word-wrap: break-word;
-    text-transform: none;
-    text-transform: none;
-}
+
 .nav {    
+    width: 100%;
     line-height:3;
     background-color: #DCDCDC;
     height : 50px;
@@ -55,20 +51,12 @@ body{
     margin: 0;
 }
 .nav-item{
+    
     margin-left: -4px;
     height : 20px;
     padding : 10px ;
-    background-color: 4CAF50;
 }
   
-.notess {
-    max-width: 300px; 
-    word-wrap: break-word;
-    text-transform: none;
-    max-width: 300px; 
-    word-wrap: break-word;
-    text-transform: none;
-}
 
 a {
 
@@ -119,4 +107,17 @@ a:hover {
     height: 100%;
     margin-left: -4px;
 }
+/* 
+.note {
+    max-width: 300px; 
+    word-wrap: break-word;
+    text-transform: none;
+    text-transform: none;
+} */
 
+.notess {
+    max-width: 280px; 
+    word-wrap: break-word;
+    text-transform: none;
+    
+}

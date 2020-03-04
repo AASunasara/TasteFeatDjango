@@ -4,6 +4,8 @@
     <head>
         <title>showwww</title>
         <link href="{% static  'css/todays_detail.css' %}" type="text/css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     </head>
     <body>
         <header>
@@ -46,14 +48,14 @@
             {% if all_items %}
                 {% for things in all_items %}
   
-            <tr class="table-secondary">
-                <td class="striker">{{ things.date }}</td>
-                <td class="striker">{{ things.fact_open_time }}</td>
-                <td class="striker">{{ things.fact_close_time }}</td>
+            <tr>
+                <td class="datee">{{ things.date }}</td>
+                <td class="fact_open_time">{{ things.fact_open_time }}</td>
+                <td class="fact_close_time">{{ things.fact_close_time }}</td>
                 <td class="notess">{{ things.setup }}</td>
                 <td class="notess">{{ things.cleansing }}</td>
-                <td class="delete"><center><a href="{% url 'delete_day' things.id %}">delete</a></center></td>
-                <td class="edit"><center><a href="{% url 'edit_day' things.id %}">edit</a></center></td>
+                <td class="delete"><center><a href="{% url 'delete_day' things.id %}"><li class="fa fa-trash" style="font-size: 25px;"></li></a></center></td>
+                <td class="edit"><center><a href="{% url 'edit_day' things.id %}"><li class="fa fa-edit" style="font-size: 25px;"></li></a></center></td>
             </tr>
        
                 {% endfor %}

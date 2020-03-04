@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
+        {% comment %} <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        
+         {% endcomment %}
         <title>home</title>
         <link href="{% static 'css/hom.css' %}" type="text/css" rel="stylesheet">
     </head>
@@ -21,8 +21,6 @@
             <a class="nav-item" href="{% url 'show' %}">Item's Details</a>
             <a class="nav-item" href="{% url 'todays_detail' %}">Day's Details</a>
             <a class="nav-item" href="{% url 'logout' %}">Logout</a>
-
-
             </nav>
        
 
@@ -49,7 +47,7 @@
             </div><br>
 
             <div>
-                <label for="iweight">Item Weight</label>
+                <label for="iweight">Item Weight:</label>
                 <!-- <input type="number" min="0.0" step="0.01" name="iweight" id="iweight">     -->
                 {{ form.iweight }}
             </div><br>
@@ -65,9 +63,8 @@
             </div><br>
             
             <div>
-                <label for="note" class="label">Note:</label>
-                <!-- <textarea rows="3" cols="30" id="note" name="note" class = "textarea" placeholder="-This field is not necessary."></textarea> -->
-                {{ form.note }}
+                <label for="note" class="notelabel">Note:</label>
+                <div class="note">{{ form.note }}</div>
             </div><br>
                     
                 <button type="submit">Add</button> 

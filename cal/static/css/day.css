@@ -3,12 +3,6 @@ body {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   margin:0;
 }
-  
-/* li {
-  float: left;  
-  width: 100%;
-} */
-  
 
 .container{
   opacity: 0.75;
@@ -21,15 +15,6 @@ body {
   top: 80px;
 }
 
-label {  
-  width: 180px;
-  display: inline-block;
-}
-  
-textarea{    
-  vertical-align: middle;
-}
-  
 button {
   width: 20%;
   text-transform: uppercase;
@@ -87,3 +72,30 @@ a:hover {
   padding : 10px ;
   background-color: 4CAF50;
 }
+#id_setup {
+  max-width: 194px;
+  max-height: 60px;
+}
+
+#id_cleansing {
+  max-width: 194px;
+  max-height: 60px;
+}
+
+label {  
+
+  width: 180px;
+  display: inline-block;
+}
+
+label.setuplabel{
+  
+  position: relative;
+  top: -25px;
+}  
+
+label.cleansinglabel{
+  
+  position: relative;
+  top: -25px;
+}  
