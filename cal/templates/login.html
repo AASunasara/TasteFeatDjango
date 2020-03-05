@@ -17,7 +17,7 @@
 
 
         {% for message in messages %}
-            {% if "logout" in message.tags %}
+            {% if "logout" or "login" in message.tags %}
                 <div class="msg">
                     <li>{{ message }}</li>
                 </div>

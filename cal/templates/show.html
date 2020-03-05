@@ -20,7 +20,7 @@
             
         
             {% for message in messages %}
-                {% if "show" in message.tags %}
+                {% if "show" or "edit_item" in message.tags %}
                     <div role="alert" class="psd-msg">
                         <br><li>{{ message }}</li><br>
                     </div>

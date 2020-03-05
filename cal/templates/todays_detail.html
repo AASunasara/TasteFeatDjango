@@ -23,7 +23,7 @@
             </nav>
         
             {% for message in messages %}
-             {% if "day" in message.tags %}
+             {% if "day" or "edit_day" in message.tags %}
              <div role="alert" class="psd-msg">
                 <br><li>{{ message }}</li><br>
              </div>
