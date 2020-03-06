@@ -112,9 +112,10 @@ def edit_day(request, id=None):
 @login_required(login_url='login')
 def delete_item(request, list_id):
     item = items.objects.get(pk=list_id)
-    item.delete()
-    messages.success(request, 'Item has been deleted!', extra_tags='show')
-    return redirect('show')
+    if request.method == "POST": 
+        item.delete()
+        messages.success(request, 'Item has been deleted!', extra_tags='show')
+        return redirect('show')
 
 @login_required(login_url='login')
 def delete_day(request, list_id):
