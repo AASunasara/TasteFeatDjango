@@ -46,8 +46,8 @@ class items(models.Model):
 
 class days(models.Model):
     date = models.DateField(default = date.today, unique=True)
-    fact_open_time = models.TimeField(default="00:00 AM")
-    fact_close_time = models.TimeField(default="00:00 PM", blank=True, null=True)
+    fact_open_time = models.TimeField(default="10:00 AM")
+    fact_close_time = models.TimeField(default="10:00 PM", blank=True, null=True)
     setup = models.TextField(max_length=1000, blank=True, null=True)
     cleansing = models.TextField(max_length=1000, blank=True, null=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)

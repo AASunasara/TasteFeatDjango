@@ -61,7 +61,7 @@ def day(request):
             messages.success(request, 'Added Successfully.', extra_tags='day')
             return redirect('day')
         else:
-            messages.success(request, "Today's Detail is already added you can go and update it." , extra_tags='day')
+            messages.success(request, "Check your details or Today's details are already added you can go and update it." , extra_tags='day')
             return render(request, 'day.html', {'form': form} )
 
     else:
@@ -93,7 +93,9 @@ def edit_item(request, id=None):
         instance = form.save(commit =  False)
         instance.save()
         messages.success(request, "Item's Details are updated!", extra_tags='edit_item')    
-    return render(request, 'show.html', {'form':form})
+        return redirect('show')
+    else:
+        return render(request, 'home.html', {'form':form})
 
 @login_required(login_url='login')
 def edit_day(request, id=None):
@@ -103,7 +105,9 @@ def edit_day(request, id=None):
         instance = form.save(commit =  False)
         instance.save()
         messages.success(request, "Days's Details are updated!", extra_tags='edit_day')
-    return render(request, 'todays_detail.html', {'form':form})
+        return redirect('todays_detail')
+    else:    
+        return render(request, 'day.html', {'form':form})
 
 @login_required(login_url='login')
 def delete_item(request, list_id):

@@ -43,24 +43,29 @@ body {
 
 }
 
-.head{
+/* .head{
 
     margin: 0%;
     padding: 0%;        
     width: 100%;
 
-}
+} */
 
 .nav {    
-    
+    width: 100%;
     line-height:3;
     background-color: #DCDCDC;
     height : 50px;
+    padding: 0;
+    margin: 0;
 }
 .nav-item{
-    height : 100%;
+    
+    margin-left: -4px;
+    height : 20px;
     padding : 10px ;
 }
+
 
 a {
 
