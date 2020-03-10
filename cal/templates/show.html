@@ -54,7 +54,7 @@
                 <td class="striker">{{ things.grade }}</td>
                 <td class="striker">{{ things.worker }}</td>
                 <td class="note">{{ things.note }}</td>
-                <td class="delete"><center><a href="{% url 'delete_item' things.id %}"><i class="fa fa-trash" style="font-size: 25px;"></i></a></center></td>
+                <td class="delete"><center><a onclick = "return confirm ('You really want to delete Details of {{ things.item_names}}?')" href="{% url 'delete_item' things.id %}"><i class="fa fa-trash" style="font-size: 25px;"></i></a></center></td>
                 <td class="edit"><center><a href="{% url 'edit_item' things.id %}"><i class="fa fa-edit" style="font-size: 25px;"></i></a></center></td>
             </tr>
        
@@ -65,3 +65,4 @@
 
     </body>
 </html>
+

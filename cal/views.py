@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
 from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib import messages
@@ -11,23 +11,27 @@ from django.contrib.auth.views import  auth_login
 
 
 def LoginView(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request.POST)
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-
-        if user is not None:
-            if user.is_active:
-                auth_login(request, user)
-                return redirect('home')
+    
+        if request.user.is_authenticated:
+            return redirect('home')
+            
+        if request.method == 'POST':
+            form = AuthenticationForm(request.POST)
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+                        
+            if user is not None:
+                if user.is_active:
+                    auth_login(request, user)
+                    return redirect('home')
+            else:
+                messages.error(request,'Username or Password may not correct!.', extra_tags='login')
+                return redirect('login')
         else:
-            messages.error(request,'Username or Password may not correct!.', extra_tags='login')
-            return redirect('login')
+            form = AuthenticationForm()
+            return render(request, 'login.html', {'form': form})
 
-    else:
-        form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
 
 @login_required(login_url='login')
 def home(request):
@@ -112,10 +116,9 @@ def edit_day(request, id=None):
 @login_required(login_url='login')
 def delete_item(request, list_id):
     item = items.objects.get(pk=list_id)
-    if request.method == "POST": 
-        item.delete()
-        messages.success(request, 'Item has been deleted!', extra_tags='show')
-        return redirect('show')
+    item.delete()
+    messages.success(request, 'Item has been deleted!', extra_tags='show')
+    return redirect('show')
 
 @login_required(login_url='login')
 def delete_day(request, list_id):

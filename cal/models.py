@@ -33,8 +33,8 @@ grades = (
 
 class items(models.Model):
     item_names = models.CharField(max_length=100, choices=item_names)
-    rweight = models.FloatField(default=0.0)
-    iweight = models.FloatField(default=0.0)
+    rweight = models.FloatField(default="0.0")
+    iweight = models.FloatField(default="0.0")
     grade = models.CharField(max_length=1, choices=grades)
     worker = models.CharField(max_length=50, choices=worker_names )
     note = models.TextField(max_length=1000, blank=True, null=True)

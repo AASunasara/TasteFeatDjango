@@ -7,7 +7,7 @@ from datetime import date
 from django.conf import settings
 
 class ItemsForm(forms.ModelForm):
-    rweight = forms.FloatField(min_value=0.0 )
+    rweight = forms.FloatField(min_value=0.0)
     iweight = forms.FloatField(min_value=0.0 )
 
     class Meta:
