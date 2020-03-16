@@ -7,17 +7,19 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
-        <div class="head">
-               
+        <header>
+            <div>
             <nav class="nav">
-            <a class="menu">MENU </a>
-            <a class="nav-item" href="{% url 'home' %}">Items</a>
-            <a class="nav-item" href="{% url 'day' %}">Day</a>
-            <a class="nav-item" href="{% url 'show' %}">Item's Details</a>
-            <a class="nav-item" href="{% url 'todays_detail' %}">Day's Details</a>
-            <a class="nav-item" href="{% url 'logout' %}">Logout</a>
+                    <a class="menu">MENU </a>
+                    <a class="nav-item" href="{% url 'home' %}">Items</a>
+                    <a class="nav-item" href="{% url 'day' %}">Day</a>
+                    <a class="nav-item" href="{% url 'show' %}">Item's Details</a>
+                    <a class="nav-item" href="{% url 'todays_detail' %}">Day's Details</a>
+                    <a class="nav-item" href="{% url 'logout' %}">Logout</a>
+
+
+
             </nav>
-            
         
             {% for message in messages %}
                 {% if "show" or "edit_item" in message.tags %}
@@ -26,31 +28,41 @@
                     </div>
                 {% endif %}
             {% endfor %}
+        </header>
+        
+        <div class="fltr">
+        <form method="get" class="filter">
+            {% csrf_token %}
+            {{filter.form.as_p}}
+            <button type="submit" value="Search">Search</button>
+
+            </form>
         </div>
         
+                
 
         <table class="container">
 
             <tr>
+                <th>ID</th>
                 <th>Date</th>
                 <th>Item name</th>
                 <th>Raw weight (kg.)</th>
-                <th>Product weight (kg.)</th>
+                <th>Item weight (kg.)</th>
                 <th>Grade</th>
                 <th>Worker Name</th>
                 <th>Note</th>
                 <th>delete item</th>
                 <th>edit item</th>
             </tr>              
-
-            {% if all_items %}
-                {% for things in all_items %}
+            {% for things in filter.qs %}
   
             <tr class="table-secondary">
-                <td class="striker">{{ things.date }}</td>
+                <td>{{ things.id }}</td>
+                <td class="date">{{ things.date |date:"o-m-d" }}</td>
                 <td class="striker">{{ things.item_names }}</td>
-                <td class="striker">{{ things.rweight }}</td>
-                <td class="striker">{{ things.iweight }}</td>
+                <td class="striker">{{ things.rweight|floatformat:3 }}</td>
+                <td class="striker">{{ things.iweight|floatformat:3 }}</td>
                 <td class="striker">{{ things.grade }}</td>
                 <td class="striker">{{ things.worker }}</td>
                 <td class="note">{{ things.note }}</td>
@@ -58,9 +70,20 @@
                 <td class="edit"><center><a href="{% url 'edit_item' things.id %}"><i class="fa fa-edit" style="font-size: 25px;"></i></a></center></td>
             </tr>
        
-                {% endfor %}
-          {% endif %}
+            {% endfor %}
         </table>
+        <table  class="container">
+            <tr>
+                <th>total number of items</th>
+                <th>total raw weight (kg.) </th>
+                <th>total items weight (kg.)</th>
+            </tr>
+            <tr>
+                <td>{{ itotal }}</td>
+                <td>{{ rwtotal|floatformat:3 }}</td>
+                <td>{{ iwtotal|floatformat:3 }}</td>
+            </tr>
+        </tabel>
 
 
     </body>

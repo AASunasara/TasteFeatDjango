@@ -9,7 +9,6 @@
     </head>
     <body>
         <header>
-            <div>
             <nav class="nav">
                     <a class="menu">MENU </a>
                     <a class="nav-item" href="{% url 'home' %}">Items</a>
@@ -30,6 +29,14 @@
              {% endif %}
              {% endfor %}
         </header>
+
+        <div class="fltr">
+        <form method="get" class="filter">
+            {% csrf_token %}
+            {{filter.form.as_p}}
+            <button type="submit" value="Search">Search</button>
+            </form>
+        </div>
         
 
         <table class="container">
@@ -45,11 +52,10 @@
                 
             </tr>              
 
-            {% if all_items %}
-                {% for things in all_items %}
+            {% for things in filter.qs %}
   
             <tr>
-                <td class="datee">{{ things.date }}</td>
+                <td class="datee">{{ things.date|date:"o-m-d" }}</td>
                 <td class="fact_open_time">{{ things.fact_open_time }}</td>
                 <td class="fact_close_time">{{ things.fact_close_time }}</td>
                 <td class="notess">{{ things.setup }}</td>
@@ -58,9 +64,17 @@
                 <td class="edit"><center><a href="{% url 'edit_day' things.id %}"><li class="fa fa-edit" style="font-size: 25px;"></li></a></center></td>
             </tr>
        
-                {% endfor %}
-          {% endif %}
+            {% endfor %}
         </table>
+        <table  class="container">
+            <tr>
+                <th>total days</th>
+            </tr>
+            <tr>
+                <td>{{ dtotal }}</td>
+            </tr>
+        </tabel>
+
 
 
     </body>

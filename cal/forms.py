@@ -1,9 +1,8 @@
 from django import forms
 from .models import days, items
 from django.contrib.auth.models import User
-from django.forms import DateField
+from django.forms import DateField 
 from datetime import date, datetime
-from datetime import date
 from django.conf import settings
 
 class ItemsForm(forms.ModelForm):
@@ -12,7 +11,7 @@ class ItemsForm(forms.ModelForm):
 
     class Meta:
         model = items
-        fields = ['item_names', 'rweight', 'iweight', 'grade', 'worker', 'note']
+        fields = ['date', 'item_names', 'rweight', 'iweight', 'grade', 'worker', 'note']
 
 
 class DaysForm(forms.ModelForm):

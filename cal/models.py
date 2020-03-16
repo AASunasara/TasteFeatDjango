@@ -41,6 +41,7 @@ class items(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateField(default = date.today)
 
+
     def __str__(self):
         return str(self.pk)
 
@@ -54,3 +55,5 @@ class days(models.Model):
 
     def __str__(self):
         return str(self.pk)
+
+

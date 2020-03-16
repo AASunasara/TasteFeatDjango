@@ -37,17 +37,22 @@
         <form method="POST" id="ItemsForm">
             {% csrf_token %}
             <div>
+                <label for="date">Date:</label>
+                {{ form.date }}
+            </div>
+            <br>
+            <div>
                 <label for="item_names">Item Name: </label>
                 {{ form.item_names }}                     
             </div><br>
             
             <div>
-                <label for="rweight">Raw Weight:</label>
+                <label for="rweight">Raw Weight (kg.):</label>
                 {{ form.rweight }}
             </div><br>
 
             <div>
-                <label for="iweight">Item Weight:</label>
+                <label for="iweight">Item Weight (kg.):</label>
                 <!-- <input type="number" min="0.0" step="0.01" name="iweight" id="iweight">     -->
                 {{ form.iweight }}
             </div><br>

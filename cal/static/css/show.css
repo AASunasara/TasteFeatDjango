@@ -24,7 +24,6 @@ body {
 }
   
 .container td, .container th {
-
     border: 1px solid #ddd;
     padding: 8px;
 }
@@ -86,7 +85,7 @@ a:hover {
 
 
 .menu, .menu:hover {
-
+    margin: 0;
     display: inline-block; 
     padding: 0 20px;   
     color: white;
@@ -119,4 +118,34 @@ a:hover {
     max-width: 300px; 
     word-wrap: break-word;
     text-transform: none;
+}
+
+
+button {
+    width: 20%;
+    text-transform: uppercase;
+    outline: 0;
+    background: blanchedalmond;
+    border: 0;
+    padding: 10px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    position: relative;
+    left: 40%;
+    
+}
+label {  
+
+    width: 180px;
+    display: inline-block;
+}
+    
+.filter{
+
+width: 400px;
+}
+.filter input{
+
+    background-color: blanchedalmond;
 }

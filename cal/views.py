@@ -8,7 +8,9 @@ from .models import days, items
 from .forms import ItemsForm, DaysForm
 from django.contrib.auth.forms import AuthenticationForm, authenticate
 from django.contrib.auth.views import  auth_login
-
+from .filters import ItemsFilter, DaysFilter
+import datetime
+from django.db.models import Sum
 
 def LoginView(request):
     
@@ -79,15 +81,21 @@ def logout_view(request):
     messages.success(request, 'You have been just logged out!', extra_tags='logout')
     return redirect('login')
 
-@login_required(login_url='login')
+@login_required(login_url='login')    
 def show(request):
-    all_items = items.objects.filter(user_id=request.user)
-    return render(request, 'show.html', {'all_items': all_items})
+    items_list = items.objects.all()
+    items_filter = ItemsFilter(request.GET, queryset=items_list)
+    rwtotal = items_filter.qs.aggregate(sum=Sum('rweight'))['sum'] 
+    iwtotal = items_filter.qs.aggregate(sum=Sum('iweight'))['sum'] 
+    itotal = items_filter.qs.count()
+    return render(request, 'show.html', {'filter': items_filter, 'rwtotal':rwtotal, 'iwtotal':iwtotal, 'itotal':itotal})
 
 @login_required(login_url='login')
 def todays_detail(request):
-    all_items = days.objects.filter(user_id=request.user)
-    return render(request, 'todays_detail.html', {'all_items': all_items})
+    days_list = days.objects.all()
+    days_filter = DaysFilter(request.GET, queryset=days_list)
+    dtotal = days_filter.qs.count()
+    return render(request, 'todays_detail.html', {'filter': days_filter, 'dtotal':dtotal})
 
 @login_required(login_url='login')
 def edit_item(request, id=None):
@@ -126,5 +134,3 @@ def delete_day(request, list_id):
     day.delete()
     messages.success(request, "Day's details are deleted!", extra_tags='todays_detail')
     return redirect('todays_detail')
-
- 
