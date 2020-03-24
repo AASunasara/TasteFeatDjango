@@ -4,13 +4,15 @@ from django.http import HttpResponse
 from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib import messages
 from django.views.generic.edit import CreateView
-from .models import days, items
-from .forms import ItemsForm, DaysForm
+from .models import factorylog, items, notes
+from .forms import ItemsForm, FactoryLogForm, Notes
 from django.contrib.auth.forms import AuthenticationForm, authenticate
 from django.contrib.auth.views import  auth_login
-from .filters import ItemsFilter, DaysFilter
+from .filters import ItemsFilter, FactoryLogFilter
 import datetime
-from django.db.models import Sum
+from django.db.models import Sum, Value
+from itertools import chain 
+from django.db.models import CharField
 
 def LoginView(request):
     
@@ -56,23 +58,29 @@ def home(request):
 
 
 @login_required(login_url='login')
-def day(request):
+def factorylogs(request):
     if request.method == 'POST':
-        form = DaysForm(request.POST or None)
-    
+        form = FactoryLogForm(request.POST or None)
+        formn = Notes(request.POST or None)
+
         if form.is_valid():
             instance = form.save(commit=False)
+            instancen = formn.save(commit=False)
             instance.user_id = request.user
+            instancen.user_id = request.user
+
             instance.save()
-            messages.success(request, 'Added Successfully.', extra_tags='day')
-            return redirect('day')
+            instancen.save()
+            messages.success(request, 'Added Successfully.', extra_tags='factorylog')
+            return redirect('factorylogs')
         else:
-            messages.success(request, "Check your details or Today's details are already added you can go and update it." , extra_tags='day')
-            return render(request, 'day.html', {'form': form} )
+            messages.success(request, "Check your details or Today's details are already added you can go and update it." , extra_tags='factorylog')
+            return render(request, 'factorylog.html', {'form': form, 'formn': formn} )
 
     else:
-        form = DaysForm()
-        return render(request, 'day.html', {'form': form})
+        form = FactoryLogForm(request.POST or None)
+        formn = Notes(request.POST or None)
+        return render(request, 'factorylog.html', {'form': form, 'formn': formn})
 
 
 @login_required(login_url='login')
@@ -89,13 +97,24 @@ def show(request):
     iwtotal = items_filter.qs.aggregate(sum=Sum('iweight'))['sum'] 
     itotal = items_filter.qs.count()
     return render(request, 'show.html', {'filter': items_filter, 'rwtotal':rwtotal, 'iwtotal':iwtotal, 'itotal':itotal})
-
+import json
+import django
 @login_required(login_url='login')
-def todays_detail(request):
-    days_list = days.objects.all()
-    days_filter = DaysFilter(request.GET, queryset=days_list)
-    dtotal = days_filter.qs.count()
-    return render(request, 'todays_detail.html', {'filter': days_filter, 'dtotal':dtotal})
+def factorylog_detail(request):
+    factorylog_list = factorylog.objects.all()
+    note_list = notes.objects.filter()
+    # s = django.core.serializers.serialize('json',request)
+    print (django.core.serializers.serialize('json',request))
+    for i in note_list:
+        print(i.factorylog_id.date)
+    # n = note_list[0].factorylog_id
+    # print(n.date, n.fact_close_time)
+    # factorylog_filter = FactoryLogFilter(request.GET, queryset= note_list[0].factorylog_id)
+
+    # all_items = list(factorylog_filter.qs) + list(note_list)
+    
+    # dtotal = factorylog_filter.qs.count()
+    return render(request, 'factorylog_detail.html', {'filter': note_list, 'dtotal':1})
 
 @login_required(login_url='login')
 def edit_item(request, id=None):
@@ -110,16 +129,20 @@ def edit_item(request, id=None):
         return render(request, 'home.html', {'form':form})
 
 @login_required(login_url='login')
-def edit_day(request, id=None):
-    instance = get_object_or_404(days, id=id )
-    form = DaysForm(request.POST or None , instance = instance )
+def edit_factorylog(request, id=None):
+    instance = get_object_or_404(factorylog, id=id )
+    instancen = get_object_or_404(notes, id=id )
+    form = FactoryLogForm(request.POST or None , instance = instance )
+    formn = Notes(request.POST or None , instance = instancen )
     if form.is_valid():
         instance = form.save(commit =  False)
+        instancen = formn.save(commit =  False)
         instance.save()
-        messages.success(request, "Days's Details are updated!", extra_tags='edit_day')
-        return redirect('todays_detail')
+        instancen.save()
+        messages.success(request, "Factorylog's Details are updated!", extra_tags='edit_factorylog')
+        return redirect('factorylog_detail')
     else:    
-        return render(request, 'day.html', {'form':form})
+        return render(request, 'factorylog.html', {'form':form, 'formn':formn})
 
 @login_required(login_url='login')
 def delete_item(request, list_id):
@@ -129,8 +152,10 @@ def delete_item(request, list_id):
     return redirect('show')
 
 @login_required(login_url='login')
-def delete_day(request, list_id):
-    day = days.objects.get(pk=list_id)
-    day.delete()
-    messages.success(request, "Day's details are deleted!", extra_tags='todays_detail')
-    return redirect('todays_detail')
+def delete_factorylog(request, list_id):
+    factorylogs = factorylog.objects.get(pk=list_id)
+    note = notes.objects.get(pk=list_id)
+    factorylogs.delete()
+    note.delete()
+    messages.success(request, "Factorylog's details are deleted!", extra_tags='factorylog_detail')
+    return redirect('factorylog_detail')

@@ -1,5 +1,5 @@
 from django import forms
-from .models import days, items
+from .models import factorylog, items, notes
 from django.contrib.auth.models import User
 from django.forms import DateField 
 from datetime import date, datetime
@@ -14,7 +14,13 @@ class ItemsForm(forms.ModelForm):
         fields = ['date', 'item_names', 'rweight', 'iweight', 'grade', 'worker', 'note']
 
 
-class DaysForm(forms.ModelForm):
+class FactoryLogForm(forms.ModelForm):
     class Meta:
-        model = days
-        fields = ['date', 'fact_open_time', 'fact_close_time', 'setup', 'cleansing']
+        model = factorylog
+        fields = ['date', 'fact_open_time', 'fact_close_time']
+
+
+class Notes(forms.ModelForm):
+    class Meta:
+        model = notes
+        fields = ['setup', 'cleansing']

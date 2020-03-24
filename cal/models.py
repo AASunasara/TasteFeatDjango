@@ -33,26 +33,41 @@ grades = (
 
 class items(models.Model):
     item_names = models.CharField(max_length=100, choices=item_names)
-    rweight = models.FloatField(default="0.0")
-    iweight = models.FloatField(default="0.0")
+    offset = models.FloatField(default="0.0")
     grade = models.CharField(max_length=1, choices=grades)
     worker = models.CharField(max_length=50, choices=worker_names )
-    note = models.TextField(max_length=1000, blank=True, null=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    date = models.DateField(default = date.today)
+    created_date = models.DateField(default = date.today)
+    def __str__(self):
+        return str(self.pk)
 
+class items(models.Model):
+    item_names = models.CharField(max_length=100, choices=item_names)
+    rweight = models.FloatField(default="0.0")
+    offset = models.FloatField(default="0.0")
+    grade = models.CharField(max_length=1, choices=grades)
+    worker = models.CharField(max_length=50, choices=worker_names )
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    note = models.TextField(max_length=1000, blank=True, null=True)
+    date = models.DateField(default = date.today)
+    def __str__(self):
+        return str(self.pk)
+
+class factorylog(models.Model):
+    date = models.DateField(default = date.today, unique=True)
+    fact_open_time = models.TimeField(default="10:00 AM")
+    fact_close_time = models.TimeField(default="10:00 PM", blank=True, null=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return str(self.pk)
 
-class days(models.Model):
-    date = models.DateField(default = date.today, unique=True)
-    fact_open_time = models.TimeField(default="10:00 AM")
-    fact_close_time = models.TimeField(default="10:00 PM", blank=True, null=True)
+
+class notes(models.Model):
+    factorylog_id = models.ForeignKey('factorylog', related_name= 'factorylog_id', on_delete=models.CASCADE, null=True)
+    # factorylog = models.ManyToManyField('factorylog')
     setup = models.TextField(max_length=1000, blank=True, null=True)
     cleansing = models.TextField(max_length=1000, blank=True, null=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-
     def __str__(self):
         return str(self.pk)
 
