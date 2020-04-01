@@ -1,9 +1,11 @@
 from django.contrib import admin
-from .models import items, factorylog, notes
+from .models import item_preparation_detail, factorylog, note, item, worker
 
-admin.site.register(items)
+admin.site.register(item_preparation_detail)
 admin.site.register(factorylog)
-admin.site.register(notes)
+admin.site.register(note)
+admin.site.register(item)
+admin.site.register(worker)
 
 
 # Register your models here.

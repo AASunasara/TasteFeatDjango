@@ -4,8 +4,8 @@ from django.http import HttpResponse
 from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib import messages
 from django.views.generic.edit import CreateView
-from .models import factorylog, items, notes
-from .forms import ItemsForm, FactoryLogForm, Notes
+from .models import item_preparation_detail, factorylog, note, item, worker
+from .forms import ItemPreForm, FactoryLogForm, NoteForm
 from django.contrib.auth.forms import AuthenticationForm, authenticate
 from django.contrib.auth.views import  auth_login
 from .filters import ItemsFilter, FactoryLogFilter
@@ -40,7 +40,7 @@ def LoginView(request):
 @login_required(login_url='login')
 def home(request):
     if request.method == 'POST':
-        form = ItemsForm(request.POST or None)
+        form = ItemPreForm(request.POST or None)
 
         if form.is_valid():
             instance = form.save(commit=False)
@@ -61,7 +61,7 @@ def home(request):
 def factorylogs(request):
     if request.method == 'POST':
         form = FactoryLogForm(request.POST or None)
-        formn = Notes(request.POST or None)
+        formn = NoteForm(request.POST or None)
 
         if form.is_valid():
             instance = form.save(commit=False)
@@ -79,7 +79,7 @@ def factorylogs(request):
 
     else:
         form = FactoryLogForm(request.POST or None)
-        formn = Notes(request.POST or None)
+        formn = NoteForm(request.POST or None)
         return render(request, 'factorylog.html', {'form': form, 'formn': formn})
 
 
@@ -91,7 +91,7 @@ def logout_view(request):
 
 @login_required(login_url='login')    
 def show(request):
-    items_list = items.objects.all()
+    items_list = item.objects.all()
     items_filter = ItemsFilter(request.GET, queryset=items_list)
     rwtotal = items_filter.qs.aggregate(sum=Sum('rweight'))['sum'] 
     iwtotal = items_filter.qs.aggregate(sum=Sum('iweight'))['sum'] 
@@ -102,7 +102,7 @@ import django
 @login_required(login_url='login')
 def factorylog_detail(request):
     factorylog_list = factorylog.objects.all()
-    note_list = notes.objects.filter()
+    note_list = note.objects.filter()
     # s = django.core.serializers.serialize('json',request)
     print (django.core.serializers.serialize('json',request))
     for i in note_list:
@@ -119,7 +119,7 @@ def factorylog_detail(request):
 @login_required(login_url='login')
 def edit_item(request, id=None):
     instance = get_object_or_404(items, id=id )
-    form = ItemsForm(request.POST or None , instance = instance )
+    form = ItemPreForm(request.POST or None , instance = instance )
     if form.is_valid():
         instance = form.save(commit =  False)
         instance.save()
@@ -133,7 +133,7 @@ def edit_factorylog(request, id=None):
     instance = get_object_or_404(factorylog, id=id )
     instancen = get_object_or_404(notes, id=id )
     form = FactoryLogForm(request.POST or None , instance = instance )
-    formn = Notes(request.POST or None , instance = instancen )
+    formn = NoteForm(request.POST or None , instance = instancen )
     if form.is_valid():
         instance = form.save(commit =  False)
         instancen = formn.save(commit =  False)
@@ -146,7 +146,7 @@ def edit_factorylog(request, id=None):
 
 @login_required(login_url='login')
 def delete_item(request, list_id):
-    item = items.objects.get(pk=list_id)
+    item = item.objects.get(pk=list_id)
     item.delete()
     messages.success(request, 'Item has been deleted!', extra_tags='show')
     return redirect('show')
@@ -154,7 +154,7 @@ def delete_item(request, list_id):
 @login_required(login_url='login')
 def delete_factorylog(request, list_id):
     factorylogs = factorylog.objects.get(pk=list_id)
-    note = notes.objects.get(pk=list_id)
+    note = note.objects.get(pk=list_id)
     factorylogs.delete()
     note.delete()
     messages.success(request, "Factorylog's details are deleted!", extra_tags='factorylog_detail')

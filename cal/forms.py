@@ -1,17 +1,15 @@
 from django import forms
-from .models import factorylog, items, notes
+from .models import item_preparation_detail, factorylog, note, item, worker
 from django.contrib.auth.models import User
 from django.forms import DateField 
 from datetime import date, datetime
 from django.conf import settings
 
-class ItemsForm(forms.ModelForm):
+class ItemPreForm(forms.ModelForm):
     rweight = forms.FloatField(min_value=0.0)
-    iweight = forms.FloatField(min_value=0.0 )
-
     class Meta:
-        model = items
-        fields = ['date', 'item_names', 'rweight', 'iweight', 'grade', 'worker', 'note']
+        model = item_preparation_detail
+        fields = ['rweight', 'note', 'grade', 'date']
 
 
 class FactoryLogForm(forms.ModelForm):
@@ -20,7 +18,7 @@ class FactoryLogForm(forms.ModelForm):
         fields = ['date', 'fact_open_time', 'fact_close_time']
 
 
-class Notes(forms.ModelForm):
+class NoteForm(forms.ModelForm):
     class Meta:
-        model = notes
+        model = note
         fields = ['setup', 'cleansing']
