@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'srvdy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sarvodaysweets',
+        'NAME': 'srvdy',
         'USER': 'root',
         'PASSWORD': '8118aass',
         'HOST': 'https://sarvodaysweets.herokuapp.com/',
