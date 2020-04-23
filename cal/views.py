@@ -4,27 +4,24 @@ from django.http import HttpResponse
 from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib import messages
 from django.views.generic.edit import CreateView
-from .models import item_preparation_detail, factorylog, note, item, worker
+from .models import  item, item_preparation_detail, factorylog, note, worker
 from .forms import ItemPreForm, FactoryLogForm, NoteForm
 from django.contrib.auth.forms import AuthenticationForm, authenticate
 from django.contrib.auth.views import  auth_login
-from .filters import ItemsFilter, FactoryLogFilter
+from .filters import ItemsFilter, FactoryLogFilter 
 import datetime
 from django.db.models import Sum, Value
 from itertools import chain 
 from django.db.models import CharField
 
 def LoginView(request):
-    
         if request.user.is_authenticated:
             return redirect('home')
-            
         if request.method == 'POST':
             form = AuthenticationForm(request.POST)
             username = request.POST['username']
             password = request.POST['password']
             user = authenticate(username=username, password=password)
-                        
             if user is not None:
                 if user.is_active:
                     auth_login(request, user)
@@ -41,19 +38,22 @@ def LoginView(request):
 def home(request):
     if request.method == 'POST':
         form = ItemPreForm(request.POST or None)
-
         if form.is_valid():
             instance = form.save(commit=False)
             instance.user_id = request.user
+
+            instance.item_id = item.objects.get(item_id = request.POST['item_id'])
+            instance.worker_id = worker.objects.get(worker_id = request.POST['worker_id'])
             instance.save()
+
             messages.success(request, 'Added Successfully.', extra_tags='home')
             return redirect('home')
         else:
-            messages.success(request, 'Not added! Check the details.. ', extra_tags='home')
-            return render(request, 'home.html', {'form': form} )
+            messages.error(request, 'Not added! Check the details.. ', extra_tags='home')
+            return render(request, 'home.html', {'form': form})
 
     else:
-        form = ItemsForm(request.POST or None)
+        form = ItemPreForm(request.POST or None)
         return render(request, 'home.html', {'form': form})
 
 
@@ -64,17 +64,17 @@ def factorylogs(request):
         formn = NoteForm(request.POST or None)
 
         if form.is_valid():
-            instance = form.save(commit=False)
             instancen = formn.save(commit=False)
-            instance.user_id = request.user
             instancen.user_id = request.user
-
-            instance.save()
             instancen.save()
+                        
+            instance = form.save(commit=False)
+            instance.note_id_id = instancen.note_id
+            instance.save()
             messages.success(request, 'Added Successfully.', extra_tags='factorylog')
             return redirect('factorylogs')
         else:
-            messages.success(request, "Check your details or Today's details are already added you can go and update it." , extra_tags='factorylog')
+            messages.error(request, "Check your details or Today's details are already added you can go and update it." , extra_tags='factorylog')
             return render(request, 'factorylog.html', {'form': form, 'formn': formn} )
 
     else:
@@ -91,71 +91,75 @@ def logout_view(request):
 
 @login_required(login_url='login')    
 def show(request):
-    items_list = item.objects.all()
+    items_list = item_preparation_detail.objects.all()
     items_filter = ItemsFilter(request.GET, queryset=items_list)
     rwtotal = items_filter.qs.aggregate(sum=Sum('rweight'))['sum'] 
-    iwtotal = items_filter.qs.aggregate(sum=Sum('iweight'))['sum'] 
+    iwtotal = 0
+    for item in items_filter.qs:
+        iwtotal = iwtotal + (item.item_id.offset * item.rweight + item.rweight)  
     itotal = items_filter.qs.count()
     return render(request, 'show.html', {'filter': items_filter, 'rwtotal':rwtotal, 'iwtotal':iwtotal, 'itotal':itotal})
-import json
-import django
+
 @login_required(login_url='login')
 def factorylog_detail(request):
     factorylog_list = factorylog.objects.all()
-    note_list = note.objects.filter()
-    # s = django.core.serializers.serialize('json',request)
-    print (django.core.serializers.serialize('json',request))
-    for i in note_list:
-        print(i.factorylog_id.date)
-    # n = note_list[0].factorylog_id
-    # print(n.date, n.fact_close_time)
-    # factorylog_filter = FactoryLogFilter(request.GET, queryset= note_list[0].factorylog_id)
-
-    # all_items = list(factorylog_filter.qs) + list(note_list)
-    
-    # dtotal = factorylog_filter.qs.count()
-    return render(request, 'factorylog_detail.html', {'filter': note_list, 'dtotal':1})
+    factorylog_filter = FactoryLogFilter(request.GET, queryset= factorylog_list)    
+    dtotal = factorylog_filter.qs.count()
+    return render(request, 'factorylog_detail.html', {'filter': factorylog_filter, 'dtotal':dtotal})
 
 @login_required(login_url='login')
 def edit_item(request, id=None):
-    instance = get_object_or_404(items, id=id )
-    form = ItemPreForm(request.POST or None , instance = instance )
-    if form.is_valid():
-        instance = form.save(commit =  False)
-        instance.save()
-        messages.success(request, "Item's Details are updated!", extra_tags='edit_item')    
-        return redirect('show')
+    if request.method == 'POST':
+        instance = get_object_or_404(item_preparation_detail, id=id )
+        form = ItemPreForm(request.POST or None , instance = instance )
+        if form.is_valid():
+            instance = form.save(commit =  False)
+            instance.save()
+            messages.success(request, "Item's Details are updated!", extra_tags='edit_item')    
+            return redirect('show')
+        else:
+            messages.error(request, 'Not Updated! Check the details.. ', extra_tags='home')
+            return render(request, 'home.html', {'form':form})
     else:
+        instance = get_object_or_404(item_preparation_detail, id=id )
+        form = ItemPreForm(request.POST or None , instance = instance )
         return render(request, 'home.html', {'form':form})
 
 @login_required(login_url='login')
 def edit_factorylog(request, id=None):
-    instance = get_object_or_404(factorylog, id=id )
-    instancen = get_object_or_404(notes, id=id )
-    form = FactoryLogForm(request.POST or None , instance = instance )
-    formn = NoteForm(request.POST or None , instance = instancen )
-    if form.is_valid():
-        instance = form.save(commit =  False)
-        instancen = formn.save(commit =  False)
-        instance.save()
-        instancen.save()
-        messages.success(request, "Factorylog's Details are updated!", extra_tags='edit_factorylog')
-        return redirect('factorylog_detail')
+    if request.method == 'POST':
+        instance = get_object_or_404(factorylog, note_id = id )    
+        instancen = get_object_or_404(note, note_id = id )
+        form = FactoryLogForm(request.POST or None , instance = instance )
+        formn = NoteForm(request.POST or None , instance = instancen )
+        if form.is_valid():
+            instance = form.save(commit =  False)
+            instancen = formn.save(commit =  False)
+            instance.save()
+            instancen.save()
+            messages.success(request, "Factorylog's are updated!", extra_tags='edit_factorylog')
+            return redirect('factorylog_detail')
+        else:    
+            messages.error(request, "Can't Update! Check Details. " , extra_tags='factorylog')
+            return render(request, 'factorylog.html', {'form':form, 'formn':formn})
     else:    
+        instance = get_object_or_404(factorylog, note_id = id )    
+        instancen = get_object_or_404(note, note_id = id )
+        form = FactoryLogForm(request.POST or None , instance = instance )
+        formn = NoteForm(request.POST or None , instance = instancen )
         return render(request, 'factorylog.html', {'form':form, 'formn':formn})
 
 @login_required(login_url='login')
 def delete_item(request, list_id):
-    item = item.objects.get(pk=list_id)
+    item = item_preparation_detail.objects.get(pk=list_id)
     item.delete()
     messages.success(request, 'Item has been deleted!', extra_tags='show')
     return redirect('show')
 
 @login_required(login_url='login')
 def delete_factorylog(request, list_id):
-    factorylogs = factorylog.objects.get(pk=list_id)
-    note = note.objects.get(pk=list_id)
-    factorylogs.delete()
-    note.delete()
+    notee = note.objects.get(pk=list_id)
+    notee.delete()
+    # dont need to delete object of factorylog because factorylog.note_id is CASCADE for on_delete ;)
     messages.success(request, "Factorylog's details are deleted!", extra_tags='factorylog_detail')
     return redirect('factorylog_detail')

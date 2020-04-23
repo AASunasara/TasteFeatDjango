@@ -39,14 +39,14 @@ class item(models.Model):
     updated_date = models.DateField(default = date.today, blank=True, null=True)
     user_id = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     def __str__(self):
-        return str(self.pk)
+        return str(self.name)
 
 class worker(models.Model):
     worker_id = models.PositiveIntegerField(primary_key=True, default='0')    
     name = models.CharField(max_length=50)
     user_id = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     def __str__(self):
-        return str(self.pk)
+        return str(self.name)
 
 class item_preparation_detail(models.Model):
     rweight = models.FloatField(default="0.0")
@@ -59,19 +59,20 @@ class item_preparation_detail(models.Model):
     def __str__(self):
         return str(self.pk)
 
-class factorylog(models.Model):
-    factorylog_id = models.PositiveIntegerField(primary_key=True, default='0')
-    date = models.DateField(default = date.today, unique=True)
-    fact_open_time = models.TimeField(default="10:00 AM")
-    fact_close_time = models.TimeField(default="10:00 PM", blank=True, null=True)
+class note(models.Model):
+    note_id = models.AutoField(primary_key=True)   
+    setup = models.TextField(max_length=1000, blank=True, null=True)
+    cleansing = models.TextField(max_length=1000, blank=True, null=True)
     user_id = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     def __str__(self):
         return str(self.pk)
 
 
-class note(models.Model):
-    factorylog_id = models.ForeignKey(factorylog, on_delete=models.PROTECT, null=True)
-    setup = models.TextField(max_length=1000, blank=True, null=True)
-    cleansing = models.TextField(max_length=1000, blank=True, null=True)
+class factorylog(models.Model):
+    factorylog_id = models.AutoField(primary_key=True)
+    date = models.DateField(default = date.today, unique=True)
+    fact_open_time = models.TimeField(default="10:00 AM")
+    fact_close_time = models.TimeField(default="10:00 PM", blank=True, null=True)
+    note_id = models.ForeignKey(note, on_delete=models.CASCADE, null=True)
     def __str__(self):
         return str(self.pk)

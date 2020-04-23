@@ -97,3 +97,8 @@ label.notelabel{
   position: relative;
   top: 40px;
 }
+option{
+
+  text-transform: uppercase;
+
+}
