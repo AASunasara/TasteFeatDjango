@@ -86,8 +86,7 @@ DATABASES = {
         'NAME': 'srvdy',
         'USER': 'root',
         'PASSWORD': '8118aass',
-        'HOST': '127.0.0.1',
-        'PORT':'3306',
+        'HOST': 'sarvodaysweets.herokuapp.com',
 
         }
 }
