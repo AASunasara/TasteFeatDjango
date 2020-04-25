@@ -25,7 +25,8 @@ SECRET_KEY = '+b55)w*+g4-mi7gu1(j3vhs2q!i8y#e*qg4s3a91xsjep%*znl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1',]
+
 STATICFILES_DIRS = [
     "/srvdy/cal/templates/static",
 ]
@@ -86,7 +87,7 @@ DATABASES = {
         'NAME': 'srvdy',
         'USER': 'root',
         'PASSWORD': '8118aass',
-        'HOST': 'sarvodaysweets.herokuapp.com',
+        'HOST': '127.0.0.1',
         'PORT':'3306',
 
         }
@@ -135,7 +136,7 @@ STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'F:\django\srvdy\cal\static\css'),
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

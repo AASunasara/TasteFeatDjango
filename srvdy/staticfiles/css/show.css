@@ -1,0 +1,151 @@
+
+body {
+    background: #76b852;
+    /* font-family: "Roboto", sans-serif; */
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin: 0;
+    width: 100%;
+}
+
+
+
+.container {
+   
+    text-transform: uppercase;
+    text-align: center;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    opacity: 0.75;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    background-color: blanchedalmond;
+    padding: 50px;
+
+}
+  
+.container td, .container th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+  
+.container tr:hover {background-color: #ddd;}
+
+
+
+.container th {
+    border: 1px solid #4CAF50;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #4CAF50;
+    color: white;
+
+}
+
+/* .head{
+
+    margin: 0%;
+    padding: 0%;        
+    width: 100%;
+
+} */
+
+.nav {    
+    width: 100%;
+    line-height:3;
+    background-color: #DCDCDC;
+    height : 50px;
+    padding: 0;
+    margin: 0;
+}
+.nav-item{
+    
+    margin-left: -4px;
+    height : 20px;
+    padding : 10px ;
+}
+
+
+a {
+
+    color:#007bff;
+    text-decoration:none;
+    background-color:transparent;
+
+}
+a:hover {
+
+    display: inline-block; 
+    padding: 0px 20px;   
+    color: white;
+    background-color: #4CAF50;
+    height: 100%;
+    margin-left: -4px;
+}
+
+
+.menu, .menu:hover {
+    margin: 0;
+    display: inline-block; 
+    padding: 0 20px;   
+    color: white;
+    background-color: #4CAF50;
+    height: 100%;
+}
+.delete a{
+    color: red;
+    text-decoration: underline;
+
+}
+.edit a{
+
+    color:green;
+    text-decoration: underline;
+
+}
+
+.delete a:hover, .edit a:hover{
+
+    display: inline-block; 
+    padding: 0px 20px;   
+    background-color:#ddd;
+    height: 100%;
+    margin-left: -4px;
+}
+
+.note {
+
+    max-width: 300px; 
+    word-wrap: break-word;
+    text-transform: none;
+}
+
+
+button {
+    width: 20%;
+    text-transform: uppercase;
+    outline: 0;
+    background: blanchedalmond;
+    border: 0;
+    padding: 10px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    position: relative;
+    left: 40%;
+    
+}
+label {  
+
+    width: 180px;
+    display: inline-block;
+}
+    
+.filter{
+
+width: 400px;
+}
+.filter input{
+
+    background-color: blanchedalmond;
+}
