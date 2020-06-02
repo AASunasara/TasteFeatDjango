@@ -25,7 +25,7 @@ SECRET_KEY = '+b55)w*+g4-mi7gu1(j3vhs2q!i8y#e*qg4s3a91xsjep%*znl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1',]
+ALLOWED_HOSTS = ['127.0.0.1','192.168.43.204']
 
 STATICFILES_DIRS = [
     "/srvdy/cal/templates/static",
