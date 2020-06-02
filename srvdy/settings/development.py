@@ -1,0 +1,1 @@
+from srvdy.settings.common import *
