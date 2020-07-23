@@ -1,6 +1,6 @@
-# SarvodayDjango
-http://sarvodaysweets.herokuapp.com deployed on heroku
-this is my another Django project for the Sweet shop.
+# TasteFeat_Django
+http://sarvodaysweets.herokuapp.com deployed on heroku (Guest_username:guest1  Guest_password:guest@visitor)
+this is my another Django project for the TasteFeat(Sweet shop).
 (web application)
  you can:
   -add daily basis factory logs.
