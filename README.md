@@ -1,5 +1,5 @@
 # TasteFeat (Django Inventory Mng. sys. WebApp)
-Deployed on heroku (Guest_username:guest1  Guest_password:guest@visitor) http://sarvodaysweets.herokuapp.com  <h1>
+Deployed on heroku (Guest_username:guest1  Guest_password:guest@visitor) http://sarvodaysweets.herokuapp.com  <h1> </h1>
 This is my another Django project for the TasteFeat(Sweet shop).
 You can:
   - add daily basis factory logs.
